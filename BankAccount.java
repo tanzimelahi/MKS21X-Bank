@@ -1,60 +1,60 @@
-public class BankAccount{
+
+public class BankAccount {
    private double balance;
    private int accountID;
    private String password;
-   public BankAccount(double b,int a,String p){
-        balance=b;
-        accountID=a;
-        p=password;
-    }
-   public double getbalance(){
-     return balance;
-    }
-   public int accountID(){
-     return accountID;
-    }
-   public void setPassword(String x){
-       password=x;
-    }
-   public String toString(){
-          return ""+accountID+"\t"+balance;
-    }
-   public boolean deposit(double n){
-       if(n>=0){
-          balance+=n;
-         return true;
-        }
-        else{
-           return false;
-        }
-      }
-   public boolean withdraw(double n){
-          if(n<=balance && n>=0){
-            balance-=n;
-            return true;
-          }
-          else{
-          return false;
-          }
+   public BankAccount(double balance,int accountID,String password) {
+	   this.balance=balance;
+	   this.accountID=accountID;
+	   this.password=password;
    }
-    public boolean authenticate(String p){
-        if(p.equals(password)){
-        return true;
-       }
-       else{
-       return false;
-      }
+   public double getBalance() {
+	   return this.balance;
    }
-  public  boolean transferTo(BankAccount other,double amount,String password){
-            if(withdraw(amount) && other.authenticate(password)){
-                    other.deposit(amount);
-                    return true;
-             }
-            else{
-              return false;
-           }
+   public int getAccountID() {
+	   return this.accountID;
    }
-   
+   public String toString() {
+	   return accountID+"\t"+ balance;
+   }
+   public boolean deposit(double money) {
+	   if (money>=0) {
+		   balance+=money;
+		   return true;
+	   }
+	   else {
+		   return false;
+	   }
+   }
+   public boolean withdraw (double money) {
+	   if (balance>=money) {
+		   balance=balance-money;
+		   return true;
+	   }
+	   else {
+		   return false;
+	   }
+   }
+private boolean authenticate(String password) {
+	   if (password.equals(this.password)) {
+		   return true;
+	   }
+	   else {
+		   return false;
+	   }
+   }
+public boolean transferTo(BankAccount other,double amount,String password) {
+	   if (other.authenticate(password)) {
+		   if(amount>=0) {
+			   other.deposit(amount);
+			   return true;
+		   }
+		   else {
+			   return false;
+		   }
+	   }else {
+		   return  false;
+	   }
+   }
 }
-    
 
